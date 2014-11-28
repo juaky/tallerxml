@@ -2,7 +2,7 @@
 
 function connectar()
 {
-mysql_connect("localhost","a6988338_acb","Romario10@"); // Connexió servidor Mysql
+mysql_connect("localhost","a6988338_acb",""); // Connexió servidor Mysql
 mysql_select_db("a6988338_acb"); // Escollim Base de Dades
 
 }
