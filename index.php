@@ -12,7 +12,7 @@ Released   : 20090303
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-
+ 
 <?php
 ini_set('display_errors', 1);  // Obrim el report d'errors en fase de desenvolupament
 session_start();     // Iniciem sessio imprescindible per gestionar validacions
