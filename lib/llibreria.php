@@ -25,6 +25,34 @@ function logout()
     header('location: index.php?accio=');
 }
 
+function visites()
+{
+// Recopilem les dades de l'entorn
+$ip= $_SERVER["REMOTE_ADDR"] ;
+$navegador = $_SERVER["HTTP_USER_AGENT"] ;
+$idioma= $_SERVER["HTTP_ACCEPT_LANGUAGE"] ;
+$pagina = $_SERVER["HTTP_REFERER"] ;
+                
+// Fem la crida a Geoplugin indicant la ip obtinguda de la variable d'entorn                 
+ $geoplugin = unserialize( file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER["REMOTE_ADDR"]) );
+
+ // llegim amb format JSON el retorn del WS del Geoplugin
+    $lat = $geoplugin['geoplugin_latitude'];
+    $long = $geoplugin['geoplugin_longitude'];
+    $codi_pais = $geoplugin['geoplugin_countryCode'];  
+    $nom_pais= $geoplugin['geoplugin_countryName'];  
+    $ciutat = $geoplugin['geoplugin_city'];   
+    $coordenades = $geoplugin['geoplugin_latitude'] . ',' . $geoplugin['geoplugin_longitude'];      
+    
+// connectem amb la BD
+//include_once("llibreria.php");
+connectar();
+//Comanda per inserir un registre en la taula visites de la BD mysql
+$res = mysql_query("INSERT INTO visites (data,ip,pais,ciutat,idioma,navegador,coordenades) VALUES (now(),'$ip','$nom_pais','$ciutat','$idioma','$navegador','$coordenades')");
+ 
+return array($ip,$ciutat,$nom_pais,$coordenades);
+
+}
 ?>
 
 
