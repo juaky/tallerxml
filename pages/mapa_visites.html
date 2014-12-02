@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<style type="text/css">   
+   html { height: 100% }   
+   body { height: 100%; margin: 0px; padding: 0px }   
+   #map { height: 100% } 
+</style> 
+<title>Google Maps JavaScript API v3 Example: Adding Markers</title>R
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript"> 
+var toggleState = 1;	
+var ctaLayer;
+var map;
+
+  function initialize() {
+    
+    var myLatlng = new google.maps.LatLng(2.120052,41.380018);
+    var myOptions = {
+      zoom: 8,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+       
+    map = new google.maps.Map(document.getElementById("map"), myOptions);
+    
+    ctaLayer = new google.maps.KmlLayer('http://areasrecreativas.net16.net/web4/pages/crea_visites_kml.php'); 
+    ctaLayer.setMap(map);
+	map.setZoom(4);
+
+      
+  }
+  
+   function toggleMyKml() {
+      if (toggleState == 1) {
+         ctaLayer.setMap(null);
+         toggleState = 0;
+      }  
+      else
+      {
+         ctaLayer.setMap(map);
+         toggleState = 1;
+      }
+   }
+
+</script>
+</head>
+<body onload="initialize()">
+  <div id="map"></div>
+  <br clear="all"/>
+    <br/>
+    <input type="button" value="Toggle KML" onClick="toggleMyKml();"/>
+</body>
+</html>
+
+
+
+

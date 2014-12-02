@@ -18,6 +18,7 @@ ini_set('display_errors', 1);  // Obrim el report d'errors en fase de desenvolup
 session_start();     // Iniciem sessio imprescindible per gestionar validacions
 include_once "lib/llibreria.php";    // Incluim la nostra llibreria de funcions
 connectar();    // Connectem la BD 
+$visitant=visites();
 
 // Validacio
 if (isset($_REQUEST["accio"]) )  // Mirem quina acció hem escollit
@@ -286,6 +287,7 @@ alert(1);
    <li class='has-sub '><a href='#'><span>Exportació</span></a>
       <ul>
          <li><a href='#'><span>XML</span></a></li>
+         <li><a href='http://areasrecreativas.net16.net/web4/pages/crea_preguntes.php'><span>Servei web propi</span></a></li>
          <li><a href='#'><span>RSS</span></a></li>
          <li><a href='#'><span>KML</span></a></li>
          <li><a href='#'><span>SVG</span></a></li>
@@ -300,7 +302,18 @@ alert(1);
          <li><a href='#'><span>Instituts</span></a></li>
      </ul>
    </li>
-   <li><a href='#'><span>Informacio</span></a></li>
+   <li class='has-sub '><a href='#'><span>Informació</span></a>
+   
+        <ul>
+         <li><a href='#'><span>Bases</span></a></li>
+         <li><a href='#'><span>Alers</span></a></li>
+         <li><a href='#'><span>Àlbum ACB</span></a></li>
+         <li><a href='#'><span>Preguntes</span></a></li>
+         <li><a href='#'><span>Calendari de Partits</span></a></li>
+         <li></li>
+         <li><a href='http://areasrecreativas.net16.net/web4/pages/mapa_visites.html' target="visitas"><span>Mapa de visitants</span></a></li>
+        </ul>
+   </li>
    </ul>
 	<div id="temps" style="color:#1F0000; font-size:14px;" align="right" >
 	</div>
@@ -366,12 +379,16 @@ alert(1);
 		</div>
 		<!-- start content -->
 		<div id="content">
-			<div id="map-canvas" style="width: 500px ; height: 300px; align:center" ></div>
+                    <div id="map-canvas" style="width: 500px ; height: 300px; align:center" >
+                        <iframe src="http://areasrecreativas.net16.net/web4/pages/mapa_visites.html?ample=500&alt=350" name="visitas" scrolling="no" align="middle" height="300" width="500" scrolling="no" align="middle"  ></iframe>
+   
+                    </div>
+                     
 			<div class="post">
 				<h1 class="title"><a href="#">Bienvenidos a nuestro sitio!</a></h1>
 				<p class="byline"><small>8, de Noviembre de 2009 </small></p>
 				<div class="entry">
-					<iframe src="http://areasrecreativas.net16.net/unitat2/album_acb.php?ample=200&alt=250" scrolling="yes" align="middle" height="300" width="500"></iframe> 
+					<iframe src="http://areasrecreativas.net16.net/unitat2/album_acb.php?ample=200&alt=250"  scrolling="yes" align="middle" height="300" width="500"></iframe> 
 				</div> 
 				 
 			</div>
@@ -424,7 +441,24 @@ alert(1);
 				</li>
 				<li>
 					<h2>Tags</h2>
-					<p class="tag"><a href="#">dolor</a> <a href="#">ipsum</a> <a href="#">lorem</a> <a href="#">sit amet</a> <a href="#">dolor</a> <a href="#">ipsum</a> <a href="#">lorem</a> <a href="#">sit amet</a></p></li>
+                                         <?php
+                                                echo "IP: " . $visitant[0] ."<br/>";
+                                                echo "Ciutat: " . $visitant[1] ."<br/>";
+                                                echo "País: " . $visitant[2] ."<br/>";
+                                                echo "Coor: " . $visitant[3] ."<br/>";
+
+                                        ?>
+                                        <dt>Localització:</dt>
+                                        <a href="http://maps.google.com/maps?q=figueres&ll=42.2667,2.9667&spn=0.005245,0.010620&t=h&hl=en">
+                                        <span class="geo"><abbr class="latitude" title="42.2667">42.2667</abbr> <abbr class="longitude"
+                                        title="2.120052">2.9667</abbr></span></a>
+                                          <div itemprop="contentLocation">
+                                          <div itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
+                                            <meta itemprop="longitude" content="2.9667" />
+                                            <meta itemprop="latitude" content="42.2667" />
+                                          </div>
+					<!--<p class="tag"><a href="#">dolor</a> <a href="#">ipsum</a> <a href="#">lorem</a> <a href="#">sit amet</a> <a href="#">dolor</a> <a href="#">ipsum</a> <a href="#">lorem</a> <a href="#">sit amet</a></p> -->
+                                </li> 
 				<li>
 					<h2>Calendar</h2>
 					<div id="calendar_wrap">
@@ -498,6 +532,13 @@ alert(1);
 					</div>
 				</li>
 				<li>
+                                <div class="vevent">
+                                            <a class="url" href="http://areasrecreativas.net16.net/web4/">http://areasrecreativas.net16.net/web4 </a>
+                                            <span class="summary">Curs XML </span>:
+                                            <abbr class="dtstart" title="2014-10-06">6 d'Octubre del 2014</abbr>-
+                                            <abbr class="dtend" title="2014-12-15">15 de desembre del 2014</abbr>,
+                                            formació no presencial <span class="location">Plataforma Odissea</span>
+                                </div>
 					<h2>Categories</h2>
 					<ul>
 						<li><a href="#">Aliquam libero</a></li>
